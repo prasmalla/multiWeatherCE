@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "multiWeatherCE",
+  "version": "1.0",
+  "description": "Some help to decide where to go this weekend :)",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./main.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "index.html"
+  }
+
+}
