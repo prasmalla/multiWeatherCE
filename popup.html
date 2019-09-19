@@ -6,11 +6,13 @@
   </head>
   <body class="panel">
     <h1>multiWeather CE</h1>
-    <input type="text" class="input" />
-    <input type="text" class="input" />
-    <input type="text" class="input" />
-    <input type="text" class="input" />
-    <button id="clickactivity">LET'S GO</button>
+      <form id='locations'>
+        <input type="text" class="input" id="location1" value="10018"/>
+        <input type="text" class="input" id="location2" value="10911"/>
+        <input type="text" class="input" id="location3" value="11224"/>
+        <input type="text" class="input" id="location4" value="11954"/>
+      </form>
+      <button id='clickactivity' form='locations'>LET'S GO</button>
     <script src="popup.js"></script>
   </body>
 </html>

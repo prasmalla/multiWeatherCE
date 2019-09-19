@@ -1,3 +1,5 @@
+<!-- obsolete -->
+
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -6,11 +8,13 @@
   </head>
   <body class="panel">
     <h1>multiWeather CE</h1>
-    <input type="text" class="input" />
-    <input type="text" class="input" />
-    <input type="text" class="input" />
-    <input type="text" class="input" />
-    <button>LET'S GO</button>
+    <form id='locations'>
+      <input type="text" class="input" id="location1" value="10018"/>
+      <input type="text" class="input" id="location2" value="02115"/>
+      <input type="text" class="input" id="location3" value="10003"/>
+      <input type="text" class="input" id="location4" value="94026"/>
+    </form>
+    <button id='submitButton'>LET'S GO</button>
     <script src="popup.js"></script>
   </body>
 </html>

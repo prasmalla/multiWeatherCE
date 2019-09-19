@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 // file for interactive parts of our chrome extension
 
+const zipcodesInputArray = ['10018', '10911', '11224', '11954'];
 // we will have inputs for a few zip codes
 // const zipcode1 = '10018';
 const zipcodesAndKeys = {};
@@ -55,6 +56,7 @@ function populateHTML(zipcode) {
   weatherInfoArray.forEach((e, ind) => {
     // get date for the current day
     const date = e.Date.slice(0, 10);
+    // console.log(locationText, date);
 
     // max and min temperatures weatherInfo[index].Temperature.Minimum.Value and replace with Maximum (all in Farinehit)
     const maxTemp = e.Temperature.Maximum.Value;
@@ -69,9 +71,10 @@ function populateHTML(zipcode) {
     // sunny? conditions: weatherInfo[index].Day.IconPhrase & weatherInfo[index].Night.IconPhrase
     const iconPhraseDay = e.Day.IconPhrase;
     const iconPhraseNight = e.Night.IconPhrase;
-    console.log(iconPhraseDay, iconPhraseNight);
+    // console.log(iconPhraseDay, iconPhraseNight);
   });
 }
 
 // fillWeatherDetailsObj('10018');
 // invoke fillWeatherDetails on each zipcode from the form
+zipcodesInputArray.forEach(e => fillWeatherDetailsObj(e));
