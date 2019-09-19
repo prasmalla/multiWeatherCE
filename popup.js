@@ -1,21 +1,18 @@
-/* eslint-disable */
-
-const globalVar = 20;
-
-document.addEventListener("DOMContentLoaded", function() {
-  function injectTheScript() {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      // query the active tab, which will be only one tab
-      //and inject the script in it
-      chrome.tabs.executeScript(tabs[0].id, { file: "main.js" });
-    });
-  }
-  
-  document.getElementById('clickactivity').addEventListener('click', () => {
-    // form values not working right now
-    // const form1Location = document.getElementById('location1').value;
-    // console.log(form1Location);
-    injectTheScript();
-    // let newMessage = document.getElementById('textInput').value;
-  });
-})
+document.getElementById("clickactivity").addEventListener("click", () => {
+  const zips = {
+    location1: document.getElementById("location1").value,
+    location2: document.getElementById("location2").value,
+    location3: document.getElementById("location3").value,
+    location4: document.getElementById("location4").value
+  };
+  chrome.tabs.executeScript(
+    {
+      code: "let zipCodes = JSON.parse('" + JSON.stringify(zips) + "');"
+    },
+    function() {
+      chrome.tabs.executeScript({
+        file: "main.js"
+      });
+    }
+  );
+});

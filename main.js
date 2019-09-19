@@ -1,11 +1,11 @@
-
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 /* eslint-disable no-undef */
 // file for interactive parts of our chrome extension
-const apiKey = 'M2ZCyJUXPgf2M1Zb7xiyebStEAVNKyEy';
-const apiKeyOld = 'dUf4Saq3DJe5rQuBUiEWMli0SRSYmwci';
-const zipcodesInputArray = ['10018', '10911', '11224', '11954'];
+// const apiKey = "M2ZCyJUXPgf2M1Zb7xiyebStEAVNKyEy";
+// const apiKeyOld = "dUf4Saq3DJe5rQuBUiEWMli0SRSYmwci";
+const apiKey = "wDmYC4Ea6HXDOKCElV5zWo5EzT0thJPF"; //prasmalla
+const zipcodesInputArray = ["10018", "10911", "11224", "11954"];
 
 // we will have inputs for a few zip codes
 // const zipcode1 = '10018';
@@ -23,11 +23,16 @@ function fillWeatherDetailsObj(zCode) {
   const locateUrl = `http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=${apiKey}&q=${zCode}`;
   fetch(locateUrl)
     .then(response => response.json())
-    .then((data) => {
+    .then(data => {
       zipcodesAndKeys[zCode] = data[0].Key;
       // return data[0].Key;
       // eslint-disable-next-line no-use-before-define
-      fillWeatherDetailsHelper(data[0].Key, zCode, data[0].EnglishName, data[0].AdministrativeArea.EnglishName);
+      fillWeatherDetailsHelper(
+        data[0].Key,
+        zCode,
+        data[0].EnglishName,
+        data[0].AdministrativeArea.EnglishName
+      );
     });
 }
 
@@ -38,10 +43,10 @@ function fillWeatherDetailsHelper(locationKey, zipcode, cityName, stateName) {
 
   fetch(fiveDayUrl)
     .then(response => response.json())
-    .then((weatherData) => {
+    .then(weatherData => {
       weatherDetails[zipcode] = {
         location: `${cityName}, ${stateName}`,
-        weatherInfo: weatherData.DailyForecasts,
+        weatherInfo: weatherData.DailyForecasts
       };
       // invoke helper to fill html doc
       // invoke with zcode fed in
@@ -52,18 +57,18 @@ function fillWeatherDetailsHelper(locationKey, zipcode, cityName, stateName) {
 
 function populateHTML(zipcode) {
   // copy the prototype in the html and set it to some variable
-  // console.log('reached here');
-  const working = document.getElementById('location').cloneNode(true);
-  working.id = 'newLocation';
-  document.getElementById('results').appendChild(working);
+  // console.log("reached here", zipCodes);
+  const working = document.getElementById("location").cloneNode(true);
+  working.id = "newLocation";
+  document.getElementById("results").appendChild(working);
   const label = weatherDetails[zipcode];
-  working.style.height = '250px';
-  working.querySelector('.locationName').style.height = '21px';
-  working.querySelector('ul').style.height = '200px';
-  
+  // working.style.height = '250px';
+  // working.querySelector('.locationName').style.height = '21px';
+  // working.querySelector('ul').style.height = '200px';
+
   counter += 1;
   if (counter === 4) {
-    document.getElementById('location').remove();
+    document.getElementById("location").remove();
   }
 
   // 'New York, NY 10018'
@@ -83,29 +88,31 @@ function populateHTML(zipcode) {
 
     // get date for the current day
     const date = e.Date.slice(0, 10);
-    workingDay.querySelector('h4').innerText = date;
+    workingDay.querySelector("h4").innerText = date;
 
     // console.log(locationText, date);
 
     // max and min temperatures weatherInfo[index].Temperature.Minimum.Value and replace with Maximum (all in Farinehit)
     const maxTemp = e.Temperature.Maximum.Value;
     const minTemp = e.Temperature.Minimum.Value;
-    workingDay.querySelector('.min').innerText = `Max: ${minTemp} F  `;
-    workingDay.querySelector('.max').innerText = `Min: ${maxTemp} F`;
+    workingDay.querySelector(".min").innerText = `Max: ${minTemp} F  `;
+    workingDay.querySelector(".max").innerText = `Min: ${maxTemp} F`;
 
     // is it raining?! weatherInfo[index].Day.HasPreciptation & weatherInfo[index].Night.HasPrecipitation
     // THESE ARE BOTH BOOLEANS
     const rainValueDay = e.Day.HasPrecipitation;
     const rainValueNight = e.Night.HasPrecipitation;
-    workingDay.querySelector('.rain').innerText = `Rain? ${(rainValueNight || rainValueDay) ? 'yup :(' : 'nope :)'}`;
+    workingDay.querySelector(".rain").innerText = `Rain? ${
+      rainValueNight || rainValueDay ? "yup :(" : "nope :)"
+    }`;
     // console.log(typeof rainValueDay, typeof rainValueNight);
 
     // sunny? conditions: weatherInfo[index].Day.IconPhrase & weatherInfo[index].Night.IconPhrase
     const iconPhraseDay = e.Day.IconPhrase;
     const iconPhraseNight = e.Night.IconPhrase;
     // console.log(iconPhraseDay, iconPhraseNight);
-    workingDay.querySelector('.day').innerText = `Day: ${iconPhraseDay}`;
-    workingDay.querySelector('.night').innerText = `Night: ${iconPhraseNight}`;
+    workingDay.querySelector(".day").innerText = `Day: ${iconPhraseDay}`;
+    workingDay.querySelector(".night").innerText = `Night: ${iconPhraseNight}`;
   });
 }
 
@@ -113,7 +120,8 @@ function populateHTML(zipcode) {
 // fillWeatherDetailsObj('10018');
 // invoke fillWeatherObj on each zipcode from the form
 // console.log('hi again');
-zipcodesInputArray.forEach(e => fillWeatherDetailsObj(e));
+// zipcodesInputArray.forEach(e => fillWeatherDetailsObj(e));
+Object.values(zipCodes).forEach(zip => fillWeatherDetailsObj(zip));
 // });
 
 // smash the template id to a height of 0
