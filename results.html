@@ -8,8 +8,8 @@
   <body class="results" id="results">
     <h2>multiWeather CE</h2>
     <div class="location" id="location">
-      <h3 class="locationName" id='locationName'>New Location</h3>
-      <ul class="5days" id='5days'>
+      <h3 class="locationName" id="locationName">New Location</h3>
+      <ul class="5days" id="5days">
         <li class="day1">
           <h4>DAY 1</h4>
           <span class="max">85&deg;F</span>
@@ -57,8 +57,18 @@
         </li>
       </ul>
     </div>
-    <script src="popup.js"></script>
+    <!-- <script src="popup.js"></script> -->
     <!-- commented out so that it injects when let's go is clicked -->
     <!-- <script src="main.js"></script> -->
+    <script type="text/javascript">
+      $(document).ready(() => {
+        $(document.body).on("click", "h3", e => {
+          $(e.target).toggleClass("inactive");
+          $(e.target)
+            .next("ul")
+            .toggleClass("collapse");
+        });
+      });
+    </script>
   </body>
 </html>
