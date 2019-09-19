@@ -15,10 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // form values not working right now
     // const form1Location = document.getElementById('location1').value;
     // console.log(form1Location);
-    
     injectTheScript();
-    
-    
     // let newMessage = document.getElementById('textInput').value;
   });
 })
