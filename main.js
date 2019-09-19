@@ -69,8 +69,9 @@ function populateHTML(zipcode) {
     // sunny? conditions: weatherInfo[index].Day.IconPhrase & weatherInfo[index].Night.IconPhrase
     const iconPhraseDay = e.Day.IconPhrase;
     const iconPhraseNight = e.Night.IconPhrase;
-    // console.log(iconPhraseDay, iconPhraseNight);
+    console.log(iconPhraseDay, iconPhraseNight);
   });
 }
 
+// fillWeatherDetailsObj('10018');
 // invoke fillWeatherDetails on each zipcode from the form

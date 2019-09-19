@@ -1,3 +1,5 @@
+// file not necessary, popup.js is not injecting the main.js page
+
 function clickPlanet() {
   // var planets = document.getElementsByClassName("planet-name"),
   //     randomplanet = Math.floor(Math.random() * planets.length),
